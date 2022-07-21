@@ -1,0 +1,28 @@
+     
+        <button type="button" class="close" ng-click="cancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title text-center" id="loginModalLabel">{{'Login'|translate}}</h5>
+        <div class="form-group text-center" ng-if="error_msg">
+              <label for="Remember" class="rememberPass required" >{{error_msg}}</label>
+        </div>
+        <div class="modal-body">
+          <form  class="modalForm" name="loginForm" ng-submit="login(login_row)" >
+            <div class="form-group">
+              <input  type="email" class="form-control" ng-model="login_row.email" placeholder="{{'Email'|translate}}">
+            </div>
+            <div class="form-group passwordFormGroup">
+              <input required type="password" class="form-control"  ng-model="login_row.password" placeholder="{{'Password'|translate}}">
+            </div>
+            <div class="form-group ">
+              <input  ng-model="login_row.rememberme" type="checkbox" id="Remember">
+              <label for="Remember" class="rememberPass">{{'Remember Password'|translate}}</label>
+            </div>
+            <button ng-disabled="loginForm.$invalid || (loading && !error_msg)" class="btn joinBtn modalLoginBtn" type="submit" >{{'Login'|translate}} <img ng-show="(loading && !error_msg)" src="assets/images/loading.jpg"   class="loading-style"> </button>
+            <a ng-click="forget()" class="forgetPassword">{{'Forgot Password'|translate}} </a>
+            <div class="or">{{'Or'|translate}} </div>
+            <a href="auth/redirect/facebook" class="btn joinBtn modalLoginBtn facbookBtn"><i class="fab fa-facebook-f"></i> Facebook </a>
+            <a href="auth/redirect/google"  class="btn joinBtn modalLoginBtn googleplusBtn"><i class="fab fa-google-plus-g"></i> Google</a>
+          </form>
+        </div>
+

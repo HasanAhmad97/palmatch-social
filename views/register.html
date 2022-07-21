@@ -1,0 +1,261 @@
+<div class="RegestrationContainer">
+    <!--Start Header-->
+    <header data-ng-controller="HeaderController">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-expand-lg order-md-1">
+
+                    <div class="col-lg-2 col-md-4">
+                        <a class="navbar-brand" ng-href="#/home">
+                            <img src="assets/images/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 ">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="signInSection float-right">
+                            <span>{{'You have Acount'|translate}}</span> <a ng-click="Login()" class="loginLink">{{'Login Please'|translate}}</a>
+                            <a href="#/home" class="skip btn">{{'Skip'|translate}}</a>
+                        </div>
+                    </div>
+
+                </nav>
+
+            </div>
+        </div>
+
+    </header>
+    <!--End Header-->
+    <div id="rootwizard">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul>
+                        <li><a href="#tab1" data-toggle="tab"></a></li>
+                        <li><a href="#tab2" data-toggle="tab"></a></li>
+                        <li><a href="#tab3" data-toggle="tab"></a></li>
+                        <li><a href="#tab4" data-toggle="tab"></a></li>
+                        <li><a href="#tab5" data-toggle="tab"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="bar" class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                 style="width: 0%;"></div>
+        </div>
+        <div class="stepsWelcom text-center">
+            <h5 ng-if = "tab != 'tab4'">{{'welcome'|translate}}</h5>
+            <p ng-if = "tab != 'tab4' && tab != 'tab3'">{{'With just a few clicks you will be ready to start your love adventure'|translate}} </p>
+            <p ng-if="tab == 'tab1'">{{'Who Are you'|translate}}</p>
+            <p ng-if="tab == 'tab3'">{{'Complete your online profile now with your passions'|translate}}</p>
+            <p ng-if = "tab == 'tab4'">{{'Tell us about yourself'|translate}}</p>
+            <p ng-if = "tab == 'tab4'">{{'So we can find people who like you for you'|translate}}</p>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane" id="tab1">
+                <form name="tab_1" id="tab_1" class="stepsForm">
+                    <div class="form-group">
+                        
+                        <label for="">{{'Birth Date'|translate}} <span class="required"> * </span></label>
+                        <input data-date-inline-picker="true" type="date" name="txtDate" max='{{maxDate}}' required ng-model="row.dob" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for=""> {{'Gender'|translate}} <span class="required"> * </span> </label>
+                        <select name="" class="select" required ng-model="row.gender">
+                            <option value="">{{'Select'|translate}}</option>
+                            <option value="male">{{'Male'|translate}}</option>
+                            <option value="female">{{'Female'|translate}}</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for=""> {{'Religion'|translate}} <span class="required"> * </span> </label>
+                        <select ng-selected="religion.id" required ng-model="row.religion_id" ng-options="religion.id as religion.translation_all.name | capitalize  for religion in options.religions">
+                            <option value="">{{'Select'|translate}}</option>
+                        </select>
+                    </div> -->
+
+                    <ul class="pager wizard form-group">
+
+                        <li class="next">
+                            <button ng-click="goToTab('tab2')" ng-disabled="tab_1.$invalid" class="joinBtn btn nextBtn">
+                                {{'Next'|translate}}
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <form name="tab_2" id="tab_2" class="stepsForm">
+                    <div class="form-group">
+                        <label for=""> {{'Education'|translate}} <span class="required"> * </span></label>
+                        <input required ng-model="row.education" type="text" class="form-control"
+                               placeholder="{{'Enter your education here'|translate}}">
+                    </div>
+                    <div class="form-group">
+                        <label for=""> {{'country'|translate}} <span class="required"> * </span></label>
+                        
+                        <select ng-selected="country.id" required ng-change="getCode(row.country_id)" ng-model="row.country_id" ng-options="country.id as country.translation_all.name | capitalize  for country in options.countries">
+                            <option value="">{{'Select'|translate}}</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for=""> {{'city'|translate}}</label>
+                        
+                        <select ng-selected="city.id"  ng-model="row.city_id" ng-options="city.id as city.translation_all.name | capitalize  for city in cities">
+                            <option value="">{{'Select'|translate}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for=""> {{'Phone Number'|translate}} <span class="required"> * </span> </label>
+                        <div class="row" style="margin: 0">
+                            <input disabled="true" class="col-md-3 col-lg-3 col-sm-3 col-xs-3 form-control code-style" ng-model="row.code"
+                                   type="text">
+                            <input class="col-md-9 col-lg-9 col-sm-9 col-xs-9 phone-style form-control" required ng-model="row.phone" numbers-only
+                                   name="Phone" type="text" placeholder="000000000">
+                        </div>
+                    </div>
+
+                    <ul class="pager wizard form-group">
+                        <li class="previous">
+                            <button ng-click="goToTab('tab1')" class="joinBtn btn nextBtn">{{'Previous'|translate}}
+                            </button>
+                        </li>
+                        <li class="next">
+                            <button ng-click="goToTab('tab3')" ng-disabled="tab_2.$invalid"
+                                    class="joinBtn btn nextBtn">{{'Next'|translate}}
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+            <div class="tab-pane" id="tab3">
+                <form name="tab_3" id="tab_3" class="stepsForm">
+                    
+                    <div class="form-group checkboxFormGroup">
+                        <label for="" class="checkboxTitle"> {{'Hobbies'|translate}} <span class="required"> * </span>
+                            <br>
+                        <span  style="font-size: 14px;margin-left: 50px;">( At least must be chosen <span class="required">5</span> )</span>
+                        </label>
+                        
+                        <div class="checkboxContainer">
+                            <label ng-repeat="hobby in options.hobbies" class="checkboxCont" for="Acting{{hobby.id}}">
+                                <input ng-model="hobby.select" type="checkbox" id="Acting{{hobby.id}}"
+                                       ng-change='itemSelect(hobby.select,hobby.id)' value="{{hobby.id}}">
+                                <span class="checkboxStyle">{{hobby.translation_all.name}}</span>
+                            </label>
+                            <!-- <a href="#" class="btn SignIn More">{{'More'|translate}}</a> -->
+                        </div>
+                    </div>
+                    <ul class="pager wizard form-group">
+                        <span style="font-size: 14px; margin-left: 70px;font-weight: bold;color: white;">{{'Select' | translate}} <span class="required"> {{remain_count}} </span> {{'to go to next' | translate}}</span>
+                        <li class="previous">
+                            <button ng-click="goToTab('tab2')" class="joinBtn btn nextBtn">{{'Previous'|translate}}
+                            </button>
+                        </li>
+                        <li class="next">
+                            <button ng-click="goToTab('tab4')" ng-disabled=" hobbies.length < 5"
+                                    class="joinBtn btn nextBtn">{{'Next'|translate}}
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+            <div class="tab-pane" id="tab4">
+                <form name="tab_4" id="tab_4" class="stepsForm">
+                    <div class="form-group checkboxFormGroup">
+                        <label for="" class="checkboxTitle">{{'Looking For'|translate}} <span
+                            class="required"> * </span> </label>
+                        <div class="checkboxContainer">
+                            <label ng-repeat="interest in options.interests" class="checkboxCont"
+                                   for="Normal{{interest.id}}">
+
+                                <input ng-model="interest.select" type="checkbox" id="Normal{{interest.id}}"
+                                       ng-change='interestSelect(interest.select,interest.id)' value="{{interest.id}}">
+                                <span class="checkboxStyle">{{interest.translation_all.name}}</span>
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">{{'Resume'|translate}}
+                            <ss ng-if="lang=='en'">(BIO)</ss>
+                        </label>
+                        <textarea ng-model="row.bio" class="form-control" maxlength="400" placeholder="{{'Maximum 400 letter'|translate}}">
+                        </textarea>
+
+                    </div>
+                    <ul class="pager wizard form-group">
+                        <li class="previous">
+                            <button ng-click="goToTab('tab3')" class="joinBtn btn nextBtn">{{'Previous'|translate}}
+                            </button>
+                        </li>
+                        <li class="next">
+                            <button ng-click="goToTab('tab5')" ng-disabled="tab_4.$invalid || interests.length == 0"
+                                    class="joinBtn btn nextBtn">{{'Next'|translate}}
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="tab-pane" id="tab5">
+                <form name="tab_5" id="tab_5" class="stepsForm">
+                    <div class="form-group uploadformGroup">
+                        <label> {{'Profile Photo'|translate}} <span class="required"> * </span></label>
+                        
+                        <Label ng-click="cropImage('avatar')" class="uploadImg" id="IMAGE_1">
+                            <img ng-src="{{profileImage}}" class="photo gallary-img" alt="">
+                        </Label>
+                    </div>
+                    <div class="form-group uploadformGroup">
+                        <label> {{'Profile Cover'|translate}}  <span class="required"> * </span></label><br>
+                        <span style="color: white !important;"> {{'Drag or click to choose a cover photo'|translate}} </span>
+                     
+                        <Label  ng-click="cropImage('cover')" class="uploadCover">
+                            <div class="innerImgCover coverReg" ng-if="!cover_change"><img class="cover" ng-src="{{coverImage}}" alt=""></div>
+                            <div style="height: 100%;width: 100%" ng-if="cover_change"><img class="cover" ng-src="{{coverImage}}" alt=""></div>
+                        </Label>
+
+                    </div>
+                    <ul class="pager wizard form-group">
+                        <li class="previous">
+                            <button ng-click="goToTab('tab4')" class="joinBtn btn nextBtn">{{'Previous'|translate}}
+                            </button>
+                        </li>
+
+                        <button ng-click="Save(row)" ng-disabled="(!avatar_change || !cover_change) || finished" class="joinBtn btn nextBtn"> <img ng-show="finished" src="assets/images/loading.jpg"   class="loading-style">
+                            {{'Finish'|translate}}
+                        </button>
+                    </ul>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#rootwizard').bootstrapWizard({
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $percent = ($current / $total) * 100;
+                $('#rootwizard .progress-bar').css({width: $percent + '%'});
+            }
+        });
+        window.prettyPrint && prettyPrint();
+        if ($(".tab-content tab-pane#tab4").hasClass("active")) {
+            $(".pager.wizard").hide();
+        }
+       
+    });
+
+    
+
+</script>
+ 

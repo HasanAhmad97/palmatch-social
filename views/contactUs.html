@@ -1,0 +1,27 @@
+<section class="profileDetails passwordpage">   
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg- col-md-6 ">
+                <form ng-submit="SaveContact(contact)" class="modalForm quickSearch passwordForm">
+                    <div class="form-group">
+                        <label>{{'Name'|translate}}</label>
+                        <input ng-model="contact.name" type="text" class="form-control" placeholder="{{'Enter Your Name'|translate}}">
+                        <label class="validate_msg rememberPass required" ng-if="validate_errors.name[0]">{{validate_errors.name[0]}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Email'|translate}}</label>
+                        <input ng-model="contact.email"  type="email" class="form-control" placeholder="{{'Enter Your Email'|translate}}">
+                        <label class="validate_msg rememberPass required" ng-if="validate_errors.email[0]">{{validate_errors.email[0]}}</label>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Description'|translate}}</label>
+                        <textarea ng-model="contact.description" class="form-control" rows="30" placeholder="{{'Enter Your Message'|translate}}" ></textarea>
+                        <label class="validate_msg rememberPass required" ng-if="validate_errors.description[0]">{{validate_errors.description[0]}}</label>
+                    </div>
+                    <button class="btn joinBtn save" type="submit">{{'Send'|translate}}</button>
+        
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,105 @@
+               
+<div class="profileBox">
+    <div class="profilePic">
+     <!--    <div class=" options"><a href="#"><i class="fas fa-ellipsis-v"></i></a></div> -->
+        <button type="button" class="close" ng-click="cancel()"  aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <img  ng-click="photoCover(user.cover)" ng-src="{{user.cover}}" alt="">
+    </div>
+    <div class="profileDetails">
+        <div class="userDesc">
+            <div class="personalPic" ng-click="photoCover(user.photo)">
+                <img class="gallary-img" ng-src="{{user.photo}}" alt="">
+            </div>
+            <h5> {{user.name}}</h5>
+            <span>{{user.age}} <ss ng-if="lang=='ar' && user.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || user.age<=10"> {{'Years Old'|translate}}</ss> .{{user.country.translation_all.name}}</span>
+            <p> <i class="fas fa-eye"></i> {{user.viewers}}</p>
+        </div>
+        <div class="row" id="userProfile">
+            <div class="col-lg-6 col-md-6">
+                <div ng-if="user.bio" class="quickSearch profilesec">
+                    <h3>{{'Resume'|translate}} <ss ng-if="lang == 'en'">(BIO)</ss></h3>
+                    <p style="word-wrap: break-word !important;">{{user.bio}}</p>
+                </div>
+                <div  ng-if="user.user_gallery.length>0" class="DiscoverHeader GalleryImages clearfix">
+                    <h4>{{'Gallery'|translate}}</h4>
+                </div>
+                <div class="row">
+                     <div ng-repeat="image in user.user_gallery" class="col-md-4 col-md-6">
+                        <div class="personImg galleryImg">
+                            <a ng-click="photoCover(image.image)">
+                                <img class="gallary-img" ng-src="{{image.image}}" alt="">
+
+                            </a>
+                        </div>
+                    </div>
+                  
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="quickSearch profilesec">
+                    <h3>{{'Information'|translate}}</h3>
+                    <div class="infoSec clearfix">
+                        <p class="leftSec float-left">{{'Age'|translate}}</p>
+                        <p class="rightSec float-right"> {{user.age}}</p>
+                    </div>
+                    <div class="infoSec clearfix">
+                        <p class="leftSec float-left">{{'Gender'|translate}}</p>
+                        <p class="rightSec float-right"> {{user.gender}}</p>
+                    </div>
+                    <div class="infoSec clearfix">
+                        <p class="leftSec float-left">{{'country'|translate}}</p>
+                        <p class="rightSec float-right"> {{user.country.translation_all.name}}</p>
+                    </div>
+                </div>
+                <div class="quickSearch profilesec">
+                    <h3>{{'Determination'|translate}}</h3>
+                    <div class="infoSec clearfix">
+                        <p class="leftSec float-left">{{'Religion'|translate}}</p>
+                        <p class="rightSec float-right"> {{user.religion.translation_all.name}}</p>
+                    </div>
+                    <div class="infoSec clearfix">
+                        <p class="leftSec float-left">{{'Education'|translate}}</p>
+                        <p class="rightSec float-right"> {{user.education}}</p>
+                    </div>
+                    <div ng-if="user.hobbies.length>0" class="infoSec clearfix">
+                        <p class="leftSec float-left">{{'Hobbies'|translate}}</p>
+                        <div class="float-right">
+                            <p ng-repeat="hobby in user.hobbies" class="rightSec"> {{hobby.hobby.translation_all.name}}<ss ng-if="$index+1 != user.hobbies.length">, &nbsp</ss> 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quickSearch profilesec clearfix" ng-if="user.interests.length>0">
+                    <h3>{{'Looking For'|translate}}</h3>
+                    <p class="float-left rightSec " ng-repeat="interest in user.interests" > {{interest.interest.translation_all.name}}<ss ng-if="$index+1 != user.interests.length">,&nbsp</ss> 
+                    </p>
+                </div>
+                <div class="quickSearch profilesec" ng-if="user.user_social_media.length>0">
+                    <h3>{{'Social Links'|translate}}</h3>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1" ng-repeat="social_link in user.user_social_media">
+                            <a target="_blank" ng-href="{{social_link.link}}"> 
+                                <li ng-class="'{{social_link.social_media.icon}}'"></li>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="logged_user" class="LikeSection" style="margin: 0 auto;">
+                <a  ng-click="likeUser(user.id)" class="btn likeBtn"><i class="fas fa-heart" ng-class="{'required':is_like}"></i> </a>
+                <a ng-href="#/chat/{{user.id}}" ng-click="cancel()"  class="btn likeBtn blueBG"><i class="fas fa-paper-plane"></i></a>
+            </div>
+            <!-- <div class="LikeSection">
+                <a ng-click="likeUser(user.id)" class="btn likeBtn" ><i class="fas fa-heart" ng-class="{'required':is_like}"></i> </a>
+                <a href="#" class="btn likeBtn blueBG"><i class="fas fa-paper-plane"></i></a>
+            </div> -->
+        </div>
+
+    </div>
+</div>
+            

@@ -1,0 +1,219 @@
+    <section class="editprofilePage" >
+        <div class="container">
+
+            <div class="row"> 
+                <div class="col-lg-6 col-md-6">
+                    <div class="nav  editProfileList flex-column nav-pills"  aria-orientation="vertical">
+                        <a class="nav-link " ng-class="{'active' : tab == 'Profile_Photo'}" ng-click = "tab = 'Profile_Photo'" ><i class="fas fa-camera"></i>
+                            {{'Profile Photo'|translate}} <span class="fas  float-right" ng-class="{'fa-chevron-right':lang != 'ar','fa-chevron-left':lang == 'ar'}"></span> </a>
+                        <a class="nav-link" ng-class="{'active' : tab == 'cover-photo'}" ng-click = "tab =  'cover-photo'"
+                            aria-controls="cover-photo" aria-selected="false"><i class="fas fa-image"></i> {{'Profile Cover'|translate}} 
+                            <span class="fas float-right" ng-class="{'fa-chevron-right':lang != 'ar','fa-chevron-left':lang == 'ar'}"></span></a>
+                        <a class="nav-link" ng-class="{'active' : tab == 'General-Information'}" ng-click = "tab =  'General-Information'" aria-controls="General-Information" aria-selected="false"><i
+                                class="fas fa-user"></i>{{'General Informations'|translate}}   <span
+                                class="fas float-right" ng-class="{'fa-chevron-right':lang != 'ar','fa-chevron-left':lang == 'ar'}"></span></a>
+                        <a class="nav-link" ng-class="{'active' : tab == 'Determination'}" ng-click = "tab =  'Determination'"
+                            aria-controls="Determination" aria-selected="false"><i class="fas fa-image"></i>{{'Determination'|translate}} 
+                            <span class="fas float-right" ng-class="{'fa-chevron-right':lang != 'ar','fa-chevron-left':lang == 'ar'}"></span></a>
+                        <a class="nav-link" ng-class="{'active' : tab == 'BIO'}" ng-click = "tab ='BIO'" aria-controls="BIO" aria-selected="false"><i class="fas fa-exclamation-circle"></i>{{'Resume'|translate}} <ss ng-if="lang == 'en'">(BIO)</ss> <span
+                                class="fas float-right" ng-class="{'fa-chevron-right':lang != 'ar','fa-chevron-left':lang == 'ar'}"></span></a>
+                        <a class="nav-link" ng-class="{'active' : tab == 'social'}" ng-click = "tab ='social'" 
+                            aria-controls="social" aria-selected="false"><i class="fas fa-link"></i>{{'Social Links'|translate}} <span
+                                class="fas float-right" ng-class="{'fa-chevron-right':lang != 'ar','fa-chevron-left':lang == 'ar'}"></span></a>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div >
+                        <div ng-show = "tab == 'Profile_Photo'" class="active">
+                            <div class="userDesc">
+                                <div class="personalPic">
+                                    <img class="gallary-img photo" ng-src="{{profileImage}}" alt="">
+                                </div>
+                                <form  >
+                                    <label  ng-click="cropImage('avatar')" class="btn changeProfileImg"><i class="fas fa-camera"></i>
+                                        {{'Change'|translate}}</label>
+                                    <!-- <input ng-model ="photo" type="file" id="changeImg" onchange="angular.element(this).scope().choosePhoto(this)"> -->
+                                </form>
+                            </div>
+                        </div>
+                        <div  ng-show = "tab == 'cover-photo'">
+                            <div class="userDesc">
+                                    <!-- <input required name="cover" ng-model="cover" id="changeCover"
+                                       onchange="angular.element(this) .scope().chooseCover(this)" type="file"> -->
+                                    <Label for="changeCover" class="changeCoverPhoto">
+                                        <i ng-show="!user_profile.cover" class="fas fa-image"></i>
+                                        <div ng-show="user_profile.cover"  class="innerImgCover "><img class="cover" ng-src="{{coverImage}}" alt=""></div>
+                                    </Label> 
+
+                                    <form  >
+                                        <label  ng-click="cropImage('cover')" class="btn changeProfileImg"><i class="fas fa-camera"></i>
+                                            {{'Change'|translate}}</label>
+                                    </form>                    
+                            </div>
+                        </div>
+                        <div  ng-show = "tab == 'General-Information'">
+                            <div class="quickSearch">
+                                <form   class="heroForm text-center userProfileInfo">
+                                    <ul class="text-left">
+                                        <li class="formlist">
+                                            <div class="form-group clearfix">
+                                                <label class="form-group-title" for=""> {{'Account Name'|translate}} </label>
+                                                <input type="text" class="form-control"  ng-model = "user_profile.name">
+                                                <label class="validate_msg rememberPass required" ng-if="validate_errors.name[0]">{{validate_errors.name[0]}}</label>
+                                            </div>
+                                        </li>
+                                        <li class="formlist">
+                                            <div class="form-group clearfix">
+                                                <label class="form-group-title" for=""> {{'Date Of Birth'|translate}} </label>
+                                                <input data-date-inline-picker="true" type="date" name="txtDate" max='{{maxDate}}' class="form-control"  ng-model = "user_profile.dob">
+                                                <label class="validate_msg rememberPass required" ng-if="validate_errors.dob[0]">{{validate_errors.dob[0]}}</label>
+                                            </div>
+                                        </li>
+                                        <li class="formlist">
+                                            <div class="form-group clearfix">
+                                                <label class="form-group-title" for=""> {{'Gender'|translate}} </label>
+                                                <select name="" class="select" required ng-model="user_profile.gender">
+                                                    <option value="male">{{'Male'|translate}}</option>
+                                                    <option value="female">{{'Female'|translate}}</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                        <li class="formlist">
+                                            <div class="form-group clearfix">
+                                                <label class="form-group-title" for=""> {{'country'|translate}} </label>
+                                                <select ng-selected="country.id" required ng-model="user_profile.country_id" ng-options="country.id as country.translation_all.name | capitalize  for country in options.countries" ng-change="countryCities(user_profile.country_id)">
+                                                </select>
+                                            </div>
+                                        </li>
+
+                                        <li class="formlist">
+                                            <div class="form-group clearfix">
+                                                <label class="form-group-title" for=""> {{'city'|translate}} </label>
+                                                <select ng-selected="city.id"  ng-model="user_profile.city_id" ng-options="city.id as city.translation_all.name | capitalize  for city in cities">
+                                                </select>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div  ng-show = "tab == 'Determination'">
+                            <div class="quickSearch">
+                                <form   class="heroForm text-center userProfileInfo">
+                                    <ul class="text-left">
+
+                                        <li class="formlist">
+                                            <div class="form-group clearfix">
+                                                <label class="form-group-title" for=""> {{'Religion'|translate}} </label>
+                                                <select ng-selected="religion.id" required ng-model="user_profile.religion_id" ng-options="religion.id as religion.translation_all.name | capitalize  for religion in options.religions">
+                                                   
+                                                </select>
+                                            </div>
+                                        </li>
+                                        <li class="formlist">
+                                            <div class="form-group clearfix">
+                                                <label class="form-group-title" for=""> {{'Education'|translate}} </label>
+                                                <input type="text" class="form-control"
+                                                    placeholder=""  ng-model = "user_profile.education">
+                                                <label class="validate_msg rememberPass required" ng-if="validate_errors.education[0]">{{validate_errors.education[0]}}</label>
+                                            </div>
+                                        </li>
+                                        
+                                        <li class="formlist">
+                                            <div class="form-group checkboxFormGroup">
+                                                <label for="" class="form-group-title"> {{'Looking For'|translate}} </label>
+                                                <label class="validate_msg rememberPass required" ng-if="interests.length == 0">  ({{'You must select one at least' |translate}})</label>
+
+                                                <div class="checkboxContainer">
+                                                    <label ng-repeat="interest in options.interests" class="checkboxCont" for="Acting{{interest.id}}">
+                                                        <input ng-model="interest.select" type="checkbox" id="Acting{{interest.id}}" ng-change='interestSelect(interest.select,interest.id)' value="{{interest.id}}">
+                                                        <span class="checkboxStyle">{{interest.translation_all.name}}</span>
+                                                    </label>
+
+                                                    <!-- <a href="#" class="btn SignIn More">{{'More'|translate}}</a> -->
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                        <li class="formlist">
+                                            <div class="form-group checkboxFormGroup">
+                                                <label for="" class="form-group-title"> {{'Hobbies'|translate}} </label>
+                                                <label class="validate_msg rememberPass required" ng-if="hobbies.length == 0">  ({{'You must select one at least' |translate}})</label>
+                                                <div class="checkboxContainer">
+                                                    <label ng-repeat="hobby in options.hobbies" class="checkboxCont" for="Interest{{hobby.id}}">
+                                                        <input ng-model="hobby.select" type="checkbox" id="Interest{{hobby.id}}" ng-change='itemSelect(hobby.select,hobby.id)' value="{{hobby.id}}">
+                                                        <span class="checkboxStyle">{{hobby.translation_all.name}}</span>
+                                                    </label>
+
+                                                    <!-- <a href="#" class="btn SignIn More">{{'More'|translate}}</a> -->
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div  ng-show = "tab == 'BIO'">
+                            <div class="quickSearch profilesec editProfileBio">
+                                <h3>{{'Resume'|translate}} </h3>
+                                <form> <textarea ng-model="user_profile.bio" name="" id="" maxlength="400" placeholder="{{'Maximum 100 letter'|translate}}"></textarea></form>
+                            </div>
+                        </div>
+                        <div  ng-show = "tab == 'social'">
+                            <div class="quickSearch">
+                                <form   class="heroForm  userProfileInfo">
+                                    <div ng-show="selectSocials.length>0" class="form-group clearfix">
+                                        <label class="form-group-title" for=""> {{'Social Links'|translate}} </label>
+                                        <select ng-change="addSocialLinks(social_select,link)" ng-model="social_select" ng-options="social_link as social_link.name | capitalize  for social_link in selectSocials">
+                                            <option value="">{{'Select'|translate}}</option>
+                                        </select>
+                                    </div>
+                                    <div  ng-show="selectSocials.length>0 && !edit_link" class="form-group clearfix">
+                                        <input ng-model="link" ng-blur="addSocialLinks(social_select,link)" type="text" class="form-control" placeholder="Http:// {{social_select.name}}">
+                                    </div>
+
+                                    <div  ng-show="edit_link"  class="form-group clearfix">
+                                        <input ng-model="edit_link" ng-blur="editSocialLinks(social_link,edit_link)" type="text" class="form-control" placeholder="Http:// {{social_select.name}}">
+                                    </div>
+
+                                    <div class="quickSearch profilesec social_links_box"  ng-repeat="social_link in social_links" >
+                                        <div class ="row">
+                                            <li class="col-2" ng-class="'{{social_link.social_media.icon}}'"></li>
+                                            <a   class="col-8" target="_blank" ng-href="{{social_link.link}}" style="word-wrap: break-word;"> 
+                                                {{social_link.link}}
+                                            </a>
+                                            <a class="col-1" ng-click="editSocial(social_link,social_link.social_media)">
+                                                <li  style="color: #FEB938 !important;" class=" fa fa-edit"></li>
+                                            </a>
+                                            <a class="col-1" ng-click="deleteSocial(social_link,social_link.social_media)">
+                                                <li class=" fa fa-trash required"></li>
+                                            </a>
+                                           
+                                        </div>
+                                    </div>
+                                  
+                                    
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+<script>
+    $(document).ready(function () {
+       today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("txtDate")[0].setAttribute('max', today);    
+    });
+
+    
+
+</script>

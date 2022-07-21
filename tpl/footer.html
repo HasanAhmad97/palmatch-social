@@ -1,0 +1,73 @@
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-10">
+          <div class="subscribe">
+            <h3>{{'Sign up to recieve a monthly email on the latest news!'|translate}}</h3>
+            <form ng-submit="addSubscription(email)" >
+              <input required ng-model="email.email" type="email" class="form-control footerFormControl" placeholder="{{'Enter your email address'|translate}}">
+              <button type="submit" class="send"><i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row footerRow">
+        <div class="col-lg-4 col-md-6 ">
+          <div class="FooterLogo">
+            <img src="assets/images/logo.png" alt="">
+          </div>
+         <!--  <ul class="footerList" style="margin-top: unset !important;">
+            <li> <a ng-href="#/faqs">{{'FAQS'|translate}}</a></li>            
+          </ul> -->
+          <h3 class="visitUs"> {{'Visit Us On'|translate}}</h3>
+          <ul class="footerSocial">
+            <li ng-repeat="social in socialMedia" ng-if="social.link">
+              <a target="_blank" ng-href="{{social.link}}"><i ng-class="social.icon"></i></a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-lg-4 col-md-6">
+          
+          <ul class="footerList">
+
+            <li> 
+              <a ng-href="#/content/about_us">{{'About Us'|translate}}
+              </a>
+            </li>
+            <li> 
+              <a ng-href="#/content/terms">{{'Terms and conditions'|translate}}
+              </a>
+            </li>
+            <li>
+              <a ng-href="#/content/how_works">{{'How Palmatch works'|translate}}
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          
+          <ul class="footerList">
+            <li> 
+              <a ng-href="#/content/policy">
+                {{'Privacy policy'|translate}}
+              </a>
+            </li>
+            <li> 
+              <a ng-href="#/contactUs">
+                {{'Contact Us'|translate}}
+              </a>
+            </li>
+            <li> 
+              <a ng-href="#/content/why">
+                {{'Why Palmatch'|translate}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="copyRight">
+      {{'Copyright'|translate}}
+    </div>

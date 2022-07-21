@@ -1,0 +1,93 @@
+
+    <section class="Suggestions subPage" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="chatBox clearfix">
+                        <div class="chatHeader clearfix">
+                            <a href="#/chats"> 
+                            <h5 class="float-left"><i class="fas " ng-class="{'fa-chevron-left':lang!='ar','fa-chevron-right':lang=='ar'}"></i>{{'Chat'|translate}}</h5></a>
+                            <h5 class="text-center">
+                                <div class="status " ng-class="is_online"></div> {{reciver.name}}
+                            </h5>
+                            <div class="profilSec  options float-right">
+                                <a class="profile dropdown" role="button" id="ProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0 20%;"> <i class="fas fa-ellipsis-v"></i> </a>
+                                <ul  class="dropdown-menu dropdown-menu-chat" aria-labelledby="ProfileDropdown">
+                                  <li ng-click="LikeUser(reciver.id)"  >
+                                    <a ng-if="!isLike" > <i class="fas fa-heart"></i>{{'Like'|translate}} </a>
+                                    <a ng-if="isLike" > <i class="fas fa-heart required" ></i>{{'Dislike'|translate}} </a>
+                                  </li>
+                                  
+                                  <!-- <li ng-click="deleteChannel()">
+                                    <a > <i class="fas fa-trash"></i>{{'Delete'|translate}} </a>
+                                  </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="MsgBox" schroll-bottom="chats">
+                            
+                            <div ng-repeat="chat in chats  "   class="senderMessage clearfix">
+                                <div ng-if="reciver.id == chat.sender.id" class="SenderImg">
+                                    <img class="gallary-img" ng-src="{{reciver.photo}}" alt="">
+                                </div>
+                                <div  ng-mouseover="showTime_(chat)"  class="chatMsg float-right" ng-if="reciver.id == chat.sender.id">
+                                    <a><p class="text_chat">
+                                    {{chat.text}} </p>
+                                    </a>
+                                </div>
+                                <div  ng-mouseover="showTime_(chat)"  class="chatMsg float-left sendMsg" ng-if="logged_user.id == chat.sender.id">
+                                    <a><p class="text_chat">
+                                    {{chat.text}} </p>
+                                    </a>
+                                </div>
+                                <div class="msgTime text-center" ng-if="chat == showTime ">{{chat.sentAt}}</div>
+                            </div>
+                            <div class="pendingMsg" ng-show="channel.accept == false && channel.sender.id == logged_user.id" > 
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <a> {{ 'your request is pending'| translate}} </a>
+                            </div>
+
+                            <div class="pendingMsg" ng-show="channel.accept == false && channel.reciver.id == logged_user.id && binding_msg " > 
+                                <button ng-click="acceptReject(true)" type="submit" class="btn joinBtn ng-binding">{{'accept' | translate}}  </button>
+                                <button ng-click="acceptReject(false)" type="submit" class="btn joinBtn ng-binding">{{'reject' | translate}}  </button>
+                            </div>
+                            <div style="padding: 22px 0;" > 
+                            </div>
+
+                        </div>
+                    </div>
+                    <form ng-submit="sendMessage(message)" class="chatForm"><a ng-click="sendMessage(message)" type="submit" class="btn likeBtn chatSend"><i class="fas fa-paper-plane"></i></a>
+                        <input type="text" ng-model="message" placeholder="{{'Write Message ...'|translate}}" class="form-control chatFormControl">
+                    </form>
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="DiscoverHeader chatTitle clearfix">
+                        <h4>{{'Chats'|translate}}</h4>
+                        <a ng-href="#/chats">{{'View More'|translate}}</a>
+                    </div>
+                    <div class="row">
+                        <div ng-repeat="suggest_user in suggest_users.slice().reverse()" ng-if="suggest_user.reciver.id == logged_user.id || suggest_user.sender.id == logged_user.id" class="col-lg-4 col-md-4">
+                            <div class="personImg">
+                                <a  ng-if="suggest_user.reciver.id != logged_user.id" ng-href="#/chat/{{suggest_user.reciver.id}}">
+                                    <img style="height: 140px !important;" ng-src="{{suggest_user.reciver.photo}}" alt="">
+                                    <div class="personDesc" >
+                                        <h3>{{suggest_user.reciver.name}}</h3>
+                                        <p>{{suggest_user.reciver.age}} <ss ng-if="lang=='ar' && suggest_user.reciver.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || suggest_user.reciver.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                    </div>
+                                   
+                                </a>
+                                 <a ng-if="suggest_user.sender.id != logged_user.id" ng-href="#/chat/{{suggest_user.sender.id}}">
+                                    <img style="height: 140px !important;" ng-src="{{suggest_user.sender.photo}}" alt="">
+                                     <div class="personDesc" >
+                                        <h3>{{suggest_user.sender.name}}</h3>
+                                        <p>{{suggest_user.sender.age}} <ss ng-if="lang=='ar' && suggest_user.sender.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || suggest_user.sender.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                    </div>
+                                   
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

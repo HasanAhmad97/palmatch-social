@@ -1,0 +1,31 @@
+  <!-----Membership Modal---->
+        <button  ng-click="cancel()" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title text-center" id="MembershipLabel">{{'Get a membership'|translate}}</h5>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div ng-repeat="subscription in subscriptions" class="col-lg-3 col-md-6 subscriptions_mg" >
+                <div class="membershipBox">
+                  <div class="background">
+                    <img src="assets/images/memberbg.png" alt="">
+                  </div>
+                  <div class="headerMember">
+                    <h6>{{subscription.translation_all.title}}</h6>
+                    <h5>{{subscription.duration}}</h5>
+                    <span>{{subscription.duration_type|translate}}</span>
+                    <span>{{subscription.cost}}$</span>
+                  </div>
+                  <ul class="membershipList" ng-bind-html="subscription.translation_all.description">
+                  </ul>
+                </div>
+                <a ng-if="(subscription.id != 1 && !user_subscribe)||(subscription.id != 1 && user_subscribe.is_finished_subscribtion)" ng-click="Subscription(subscription.id)" class="btn joinBtn modalLoginBtn subscribeBtn"> {{'Subscribe'|translate}}</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+  <!----- End Membership Modal---->

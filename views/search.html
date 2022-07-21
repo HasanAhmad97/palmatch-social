@@ -1,0 +1,145 @@
+<section class="Suggestions subPage">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 order-lg-1 order-md-2 order-2">
+                <div class="quickSearch SortBy searchBox">
+                    <form class=" text-center">
+                        <div class="form-group clearfix">
+                            <i class="fas fa-search"></i>
+                            <input ng-change="searchBy(filters)" ng-model="filters.sortByText" ng-blur="searchBy(filters)"  type="text" class="form-control search-form-contol" placeholder="{{'Search By' |translate}} {{filters.sortby |translate}}">
+                        </div>
+                    </form>
+                </div>
+                <div class="DiscoverHeader clearfix">
+                    <h4> {{'Search Suggestions'|translate}}</h4>
+                </div>
+                <div ng-if="users.length && (nextUrl || prevUrl)" class="DiscoverHeader clearfix" >
+                    <button class="prevNext prev" ng-click="pagination(prevUrl,filters)"><i class="fas " ng-class="{'fa-angle-double-right':lang == 'ar','fa-angle-double-left':lang == 'en'}"></i></button>
+                   <button class="prevNext next" ng-click="pagination(nextUrl,filters)"><i class="fas "  ng-class="{'fa-angle-double-left':lang == 'ar','fa-angle-double-right':lang == 'en'}"></i></button>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6" ng-repeat="user in users">
+                        <div  ng-click="userProfile(user.id)" class="personImg">
+                            <a >
+                                <img ng-src="{{user.photo}}" alt="">
+                                <div class="personDesc">
+                                    <h3>{{user.name}}</h3>
+                                    <p>{{user.age}} <ss ng-if="lang=='ar' && user.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || user.age<=10"> {{'Years Old'|translate}}</ss> </p>
+                                    <p>{{user.country.translation_all.name}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-8 order-lg-2 order-md-1 order-1">
+                <div class="quickSearch SortBy">
+                    <h3>{{'Search By'|translate}}</h3>
+                    <form class="heroForm text-center">
+                        <div class="form-group clearfix">
+                            <select ng-model="filters.sortby" name="sortby" id="" class="select">
+                                <option value="">{{'Select'|translate}} </option>
+                                <option value="Name" selected>{{'Name'|translate}} </option>
+                                <option value="Education">{{'Education'|translate}} </option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="quickSearch SortBy">
+                    <h3>{{'Advance Filter'|translate}} </h3>
+                    <form ng-submit="search(filters)" class="heroForm text-center">
+                        <ul class="text-left">
+                            <li class="formlist">
+                                <div class="form-group clearfix">
+                                    <label class="form-group-title" for=""> {{'Seeking a'|translate}}  </label>
+                                    <div class="Rightside float-right">
+                                        <label class="radioButtonContainer">{{'Man'|translate}}
+                                            <input ng-model="filters.gender" value="male" type="radio" class="radioButton">
+                                            <span class="checkmark"></span>
+                                        </label>
+
+                                        <label class="radioButtonContainer">{{'Woman'|translate}}
+                                            <input ng-model="filters.gender" value="female" type="radio" class="radioButton">
+                                            <span class="checkmark"></span>
+                                        </label> </div>
+                                </div>
+                            </li>
+                            <li class="formlist">
+                                <div class="form-group clearfix">
+                                    <label class="form-group-title" for=""> {{'Age'|translate}} </label>
+                                    <div class="Rightside float-right">
+                                      <input numbers-only ng-model="filters.age_from" type="text" class="form-control ageconttrol" placeholder="{{'from'|translate}}">
+                                      <span class="dash">-</span>
+                                      <input numbers-only ng-model="filters.age_to" type="text" class="form-control ageconttrol" placeholder="{{'to'|translate}}">
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="formlist">
+                                <div class="form-group clearfix">
+                                    <label class="form-group-title" for=""> {{'country'|translate}} </label>
+                                    <select ng-selected="country.id"  ng-model="filters.country_id" ng-options="country.id as country.translation_all.name | capitalize  for country in options.countries">
+                                        <option value="">{{'Select'|translate}}</option>
+                                    </select>
+
+                                  
+                                </div>
+                            </li>
+                            <li class="formlist">
+                                <div class="form-group clearfix">
+                                    <label class="form-group-title" for=""> {{'Looking For'|translate}}    </label>
+                                    
+                                    <select ng-selected="interest.id"  ng-model="filters.interest_id" ng-options="interest.id as interest.translation_all.name | capitalize  for interest in options.interests">
+                                        <option value="">{{'Select'|translate}}</option>
+                                    </select>
+
+                                </div>
+                            </li>
+                            <li class="formlist">
+                                <div class="form-group clearfix">
+                                    <label class="form-group-title" for=""> {{'Religion'|translate}}   </label>
+                                   
+                                    <select ng-selected="religion.id"  ng-model="filters.religion_id" ng-options="religion.id as religion.translation_all.name | capitalize  for religion in options.religions">
+                                        <option value="">{{'Select'|translate}}</option>
+                                    </select>
+
+                                </div>
+                            </li>
+                            <li class="formlist">
+                                <div class="form-group clearfix">
+                                    <label class="form-group-title" for=""> {{'Hobbies'|translate}}   </label>
+                                    <select ng-selected="hobby.id"  ng-model="filters.hobby_id" ng-options="hobby.id as hobby.translation_all.name | capitalize  for hobby in options.hobbies">
+                                        <option value="">{{'Select'|translate}}</option>
+                                    </select>
+
+                                </div>
+                            </li>
+                        </ul>
+
+                        <button type="submit" class="btn joinBtn"> {{'Search'|translate}}</button>
+                    </form>
+
+                </div>
+                <div class="quickSearch GetMembershipBox">
+                    <div class="background"><img src="assets/images/mask.png" alt=""></div>
+                    <h3> {{'Get a membership'|translate}} </h3>
+                    <p>{{'For More Features'|translate}}</p>
+                    <a ng-click="membership()" class="btn gotMember btn">{{'Got It'|translate}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <script>
+        $('.select').selectric({
+            disableOnMobile: false,
+            nativeOnMobile: false,
+            dir: "ltr"
+        });
+    </script>
+
+

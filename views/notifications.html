@@ -1,0 +1,69 @@
+<section class="Suggestions subPage">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="DiscoverHeader clearfix">
+                    <h4> {{'Notifications'|translate}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-repeat = "notification in notifications">
+            <a href="{{notification.url}}" ng-click="deleteNotification(notification.$id)" class="col-sm-12" ng-if="notification.type == 'chat'">
+                <div class="alert fade alert_padding alert-simple alert-primary alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                  <i class="fas fa-comments animated"></i>
+                  <strong class="font__weight-semibold"><span>{{ 'Chat' | translate}}! </strong> {{'Sent message for you by'|translate}} {{notification.sender.name}}  ({{notification.text}}).</span>
+                </div>
+            </a>
+            <a href="{{notification.url}}" ng-click="deleteNotification(notification.$id)" class="col-sm-12" ng-if="notification.type == 'payment'">
+                <div class="alert alert_padding fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                    <button type="button" class="close font__size-18" data-dismiss="alert"> 
+                        <span aria-hidden="true">
+                            <i class="fa fa-times warning"></i>
+                        </span>
+                        <span class="sr-only"></span>
+                    </button>
+                  <i class="start-icon fa fa-exclamation-triangle faa-flash animated"></i>
+                  <strong class="font__weight-semibold">{{ 'Payment' | translate}}!</strong> {{notification.text | translate}}.
+                </div>
+            </a>
+            <a href="{{notification.url}}" ng-click="deleteNotification(notification.$id)" class="col-sm-12" ng-if="notification.type == 'like'">
+                <div class="alert fade alert_padding alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                
+                    <i class="start-icon fa fa-thumbs-up faa-bounce animated"></i>
+                    <strong class="font__weight-semibold">{{ 'like' | translate}}!</strong> {{notification.text | translate}}
+                    <span class="notifTime">{{notification.sentAt}}</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- <section class="Suggestions subPage">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="DiscoverHeader clearfix">
+                        <h4> {{'Notifications'|translate}}</h4>
+                    </div>
+                
+                    <div class="chatRequestBox clearfix" ng-repeat = "notification in notifications">
+                        <div class="chatRequestBoxImg">
+                            <img class="gallary-img" ng-src="{{chat.sender.photo}}" alt="">
+                        </div>
+                        <a ng-href="#/chat/{{chat.sender.id}}" class="chatRequestBoxDetails">
+                            <h3>{{chat.sender.name}}</h3>
+                            <span>{{chat.sender.age}} {{'Years Old'|translate}}.</span>
+                            <li  class="Message">
+                               {{chat.last_msg}}
+                            </li>
+                        </a>
+                    </div>
+                    
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+ -->

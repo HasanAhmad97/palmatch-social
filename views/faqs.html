@@ -1,0 +1,21 @@
+<section class="profileDetails passwordpage">   
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class=" col-md-6 ">
+                <ul class="faqsList" >
+                    <div style="margin-bottom: 15px" ng-repeat="faq in  faqs">
+                        <li class="nav-link active" style="margin-bottom: unset !important;">
+                            <div id="headingOnea" class="" data-toggle="collapse" data-target="#collapseOnea{{faq.id}}"> 
+                            <i class="fas fa-question"></i>
+
+                            {{faq.translation_all.text}}</div> 
+                        </li>
+                        <div id="collapseOnea{{faq.id}}" class="collapse answers" aria-labelledby="headingOne">
+                            <div ng-repeat="answer in  faq.questions_answer">{{answer.translation_all.text}}</div>
+                        </div>
+                    </div>                      
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

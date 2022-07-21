@@ -1,0 +1,37 @@
+
+        <button type="button" class="close"  ng-click="cancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title text-center" id="SignupModelLabel" >{{'Sign Up'|translate}}</h5>
+        <div class="form-group text-center" ng-if="error_msg">
+              <label for="Remember" class="rememberPass required" >{{error_msg}}</label>
+        </div>
+        <div class="modal-body">
+          <form name="signUp" class="modalForm" ng-submit="signUp_(signup_row)" novalidate>
+            <div class="form-group">
+              <input required ng-model="signup_row.name" type="text" class="form-control" placeholder="{{'User Name'|translate}} *">
+              <label class="validate_msg rememberPass required" ng-if="validate_errors.name[0]">{{validate_errors.name[0]}}</label>
+            </div>
+            <div class="form-group">
+              <input required type="email" ng-model="signup_row.email" class="form-control" placeholder="{{'Email'|translate}} *">
+              <label class="validate_msg rememberPass required" ng-if="validate_errors.email[0]">{{validate_errors.email[0]}}</label>
+            </div>
+            <div class="form-group ">
+              <input required ng-model="signup_row.password" type="password" class="form-control" placeholder="{{'Password'|translate}} *">
+              <label class="validate_msg rememberPass required" ng-if="validate_errors.password[0]" >{{validate_errors.password[0]}}</label>
+            </div>
+            <div class="form-group passwordFormGroup">
+              <input required ng-model="signup_row.password_confirmation" type="password" class="form-control" placeholder="{{'Confirm password'|translate}} *">
+            </div>
+            <div class="form-group ">
+              <input required ng-model="signup_row.term"  type="checkbox" id="Remember">
+              <label for="Remember" class="rememberPass">{{'Terms & Conditions'|translate}} *</label>
+              <label class="validate_msg rememberPass required" ng-if="validate_errors.term[0]" >{{'you must accept terms and conditions'|translate}}</label>
+            </div>
+            <button class="btn joinBtn modalLoginBtn" ng-disabled=" (loading && !error_msg&& !validate_errors)" type="submit">{{'Join'|translate}} <img ng-show="(loading && !error_msg && !validate_errors)" src="assets/images/loading.jpg"   class="loading-style"></button>
+             <div class="or">{{'Or'|translate}} </div>
+            <a href="auth/redirect/facebook" class="btn joinBtn modalLoginBtn facbookBtn"><i class="fab fa-facebook-f"></i> Facebook </a>
+            <a  href="auth/redirect/google" class="btn joinBtn modalLoginBtn googleplusBtn"><i class="fab fa-google-plus-g"></i> Google</a>
+          </form>
+        </div>
+

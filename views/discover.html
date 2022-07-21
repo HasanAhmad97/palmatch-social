@@ -1,0 +1,255 @@
+    <section class="Suggestions subPage">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12 order-lg-1 order-md-2 order-2"  >
+                    <div ng-if="suggests.length" class="DiscoverHeader clearfix">
+                        <h4>{{'Suggestions'|translate}}</h4>
+                        <a ng-href="#/details/suggests">{{'View More'|translate}}</a>
+                    </div>
+                    <div ng-if="suggests.length" class="row">
+                        <div class="col-lg-4 col-md-6" ng-repeat="suggest in suggests">
+                            <div class="personImg" ng-click="userProfile(suggest.id)" >
+                                <a>
+                                    <img ng-src="{{suggest.photo}}" alt="">
+                                    <div class="personDesc">
+                                        <h3>{{suggest.name}}</h3>
+                                        <p>{{suggest.age}} <ss ng-if="lang=='ar' && suggest.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || suggest.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                        <p>{{suggest.country.translation_all.name}} </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-8 order-lg-2 order-md-1 order-1">
+                    <div class="quickSearch">
+                        <h3>{{'Quick Search'|translate}}</h3>
+                        <form ng-submit="search(filters)" class="heroForm text-center">
+                            <ul class="text-left">
+                                <li class="formlist">
+                                    <div class="form-group clearfix">
+                                        <label class="form-group-title" for=""> {{'Seeking a'|translate}} </label>
+                                        <div class="Rightside float-right">
+                                            <label class="radioButtonContainer">{{'Man'|translate}}
+                                                <input ng-model="filters.gender" value="male" type="radio" class="radioButton">
+                                                <span class="checkmark"></span>
+                                            </label>
+
+                                            <label class="radioButtonContainer">{{'Woman'|translate}} 
+                                                <input ng-model="filters.gender" value="female" type="radio" class="radioButton">
+                                                <span class="checkmark"></span>
+                                            </label> </div>
+                                    </div>
+                                </li>
+                                <li class="formlist">
+                                    <div class="form-group clearfix">
+                                        <label class="form-group-title" for=""> {{'Age'|translate}}  </label>
+                                        <div class="Rightside float-right">
+                                          <input numbers-only ng-model="filters.age_from" type="text" class="form-control ageconttrol" placeholder="{{'from'|translate}}">
+                                          <span class="dash">-</span>
+                                          <input numbers-only ng-model="filters.age_to" type="text" class="form-control ageconttrol" placeholder="{{'to'|translate}}">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="formlist">
+                                    <div class="form-group clearfix">
+                                        <label class="form-group-title" for=""> {{'country'|translate}} </label>
+                                        <div class="Rightside float-right" style="width: 56%;">
+                                            <select ng-model="filters.country_id" name="country_id" class="form-control search-select" ng-options="country.id as country.translation_all.name for country in options.countries">
+                                              <option value="">{{'Select'|translate}}</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <button type="submit" class="btn joinBtn">{{'Search'|translate}}</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="Like" ng-if="users_Interests.length">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="DiscoverHeader clearfix">
+                        <h4>{{'You May Like'|translate}}</h4>
+                        <a ng-href="#/details/user_Interests">{{'View More'|translate}}</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6" ng-repeat="user_Interests in users_Interests">
+                            <div class="personImg" ng-click="userProfile(user_Interests.id)">
+                                <a >
+                                    <img ng-src="{{user_Interests.photo}}" alt="">
+                                    <div class="personDesc">
+                                        <h3>{{user_Interests.name}}</h3>
+                                        <p>{{user_Interests.age}} <ss ng-if="lang=='ar' && user_Interests.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || user_Interests.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                        <p>{{user_Interests.country.translation_all.name}} </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="sameHabbies" ng-if="users_hobbies.length">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="DiscoverHeader clearfix">
+                        <h4>{{'Same Hobbies'|translate}}</h4>
+                        <a ng-href="#/details/user_hobbies">{{'View More'|translate}}</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6" ng-repeat="user_hobbies in users_hobbies">
+                            <div class="personImg" ng-click="userProfile(user_hobbies.id)">
+                                <a >
+                                    <img ng-src="{{user_hobbies.photo}}" alt="">
+                                    <div class="personDesc">
+                                        <h3>{{user_hobbies.name}}</h3>
+                                        <p>{{user_hobbies.age}} <ss ng-if="lang=='ar' && user_hobbies.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || user_hobbies.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                        <p>{{user_hobbies.country.translation_all.name}} </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="toKnow" ng-if="random_user">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="DiscoverHeader clearfix">
+                        <h4>{{'Get to know'|translate}}</h4>
+                    </div>
+                    <div class="personCard clearfix">
+                        <div class="personImg" ng-click="userProfile(random_user.id)">
+                            <a >
+                                <img ng-src="{{random_user.photo}}" alt="">
+                                <div class="personDesc">
+                                    <h3>{{random_user.name}}</h3>
+                                    <p>{{random_user.age}} <ss ng-if="lang=='ar' && random_user.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || random_user.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                    <p>{{random_user.country.translation_all.name}}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="personDetails clearfix">
+                            <table>
+                                <tr>
+                                    <td><span>{{'Religion'|translate}}</span>
+                                        <p>{{random_user.religion.translation_all.name}}</p>
+                                    </td>
+                                    <td><span>{{'Hobbies'|translate}}</span>
+                                        <p ng-repeat="hobby in random_user.hobbies|limitTo:1" class="rightSec"> {{hobby.hobby.translation_all.name}}<ss ng-if="random_user.hobbies.length>1">..</ss>
+                                                </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span>{{'country'|translate}}</span>
+                                        <p>{{random_user.country.translation_all.name}}</p>
+                                    </td>
+                                    <td><span>{{'Looking For'|translate}}</span>
+                                        <p class="rightSec " ng-repeat="interest in random_user.interests|limitTo:1" > {{interest.interest.translation_all.name}}<ss ng-if="random_user.interests.length>1">..</ss> 
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="LikeSection float-right">
+                                <a ng-click="LikeUser(random_user.id,1)" class="btn likeBtn"><i class="fas fa-heart" ng-class="{'required':random_user.is_like}"></i> </a>
+                                <a ng-href="#/chat/{{random_user.id}}" class="btn likeBtn blueBG"><i class="fas fa-paper-plane"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="toKnow" ng-if="new_registers.length">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="DiscoverHeader clearfix">
+                        <h4>{{'Recently Joined'|translate}}</h4>
+                        <a ng-href="#/details/new_registers">{{'View More'|translate}}</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6" ng-repeat="new_register in new_registers">
+                            <div class="personImg" ng-click="userProfile(new_register.id)"> 
+                                <a >
+                                    <img ng-src="{{new_register.photo}}" alt="">
+                                    <div class="personDesc">
+                                        <h3>{{new_register.name}}</h3>
+                                        <p>{{new_register.age}} <ss ng-if="lang=='ar' && new_register.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || new_register.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                        <p>{{new_register.country.translation_all.name}} </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="toKnow" ng-if="suitable_user">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="DiscoverHeader clearfix">
+                        <h4>{{'Suitable For You'|translate}}</h4>
+                    </div>
+                    <div class="personCard clearfix">
+                        <div class="personImg"  ng-click="userProfile(suitable_user.id)">
+                            <a>
+                                <img ng-src="{{suitable_user.photo}}" alt="">
+                                <div class="personDesc">
+                                    <h3>{{suitable_user.name}}</h3>
+                                    <p>{{suitable_user.age}} <ss ng-if="lang=='ar' && suitable_user.age>10">{{'year Old'|translate}}</ss><ss ng-if="lang!='ar' || suitable_user.age<=10"> {{'Years Old'|translate}}</ss></p>
+                                    <p>{{suitable_user.country.translation_all.name}}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="personDetails clearfix">
+                            <table>
+                                <tr>
+                                    <td><span>{{'Religion'|translate}}</span>
+                                        <p>{{suitable_user.religion.translation_all.name}}</p>
+                                    </td>
+                                    <td><span>{{'Hobbies'|translate}}</span>
+                                        <p ng-repeat="hobby in suitable_user.hobbies|limitTo:1" class="rightSec"> {{hobby.hobby.translation_all.name}}<ss ng-if="suitable_user.hobbies.length>1">..</ss> 
+                                                </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span>{{'country'|translate}}</span>
+                                        <p>{{suitable_user.country.translation_all.name}}</p>
+                                    </td>
+                                    <td><span>{{'Looking For'|translate}}</span>
+                                        <p class="
+                                        rightSec " ng-repeat="interest in suitable_user.interests|limitTo:1" > {{interest.interest.translation_all.name}}<ss ng-if="suitable_user.interests.length>1">..</ss> 
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="LikeSection float-right">
+                                <a ng-click="LikeUser(suitable_user.id,2)"  class="btn likeBtn"><i class="fas fa-heart" ng-class="{'required':suitable_user.is_like}"></i> </a>
+                                <a ng-href="#/chat/{{suitable_user.id}}"  class="btn likeBtn blueBG"><i class="fas fa-paper-plane"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
