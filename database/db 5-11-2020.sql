@@ -1,2 +1,0 @@
-ALTER TABLE `likes`
-	ADD COLUMN `is_like` TINYINT NOT NULL DEFAULT 0 AFTER `user_like_id`;
